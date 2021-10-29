@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 
 interface PageProp {
   isActive?: boolean;
+  user?: any;
   summary?: {
     completed: number;
     inProgress: number;
@@ -35,10 +36,10 @@ const Slide: React.FC<SlideProp> = ({ heading, content, icon, color, backgroundC
   )
 }
 
-const Introduction = ({ isActive, summary }: PageProp) => {
+const Introduction = ({ isActive, summary, user }: PageProp) => {
   return (
     <Slide
-      heading="Hey Andrew! Let&apos;s check out your Go1 activity this week..."
+      heading={`Hey ${user?.first_name}! Let's check out your Go1 activity this week...`}
       content="Swipe to find out..."
       color="background"
       backgroundColor="noteMid"

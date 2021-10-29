@@ -14,20 +14,26 @@ const pages = [
   Summary,
 ];
 
+interface UserResponse {
+  first_name: string;
+  last_name: string;
+  last_login: string;
+}
+
 interface EnrolmentResponse {
   hits: any[];
   total: number;
 }
 
 const MotionCarousel = ({ width }: { width: number}) => {
-  const { data, isLoading } = useFetchData<EnrolmentResponse>('/enrollments?limit=50');
+  const { data: user } = useFetchData<UserResponse>('/me');
+  const { data } = useFetchData<EnrolmentResponse>('/enrollments?limit=50');
   const [summary, setSummary] = useState<any>();
 
   useEffect(() => {
     const completed = data?.hits?.filter(i => i.status === 'completed').length || 0;
     const inProgress = data?.hits?.filter(i => i.status === 'in-progress').length || 0;
     const assigned = data?.hits?.filter(i => i.status === 'assigned').length || 0;
-    console.log({ completed, inProgress, assigned });
     setSummary({ completed, inProgress, assigned });
   }, [data])
 
@@ -81,7 +87,7 @@ const MotionCarousel = ({ width }: { width: number}) => {
       {props.map(({ x, display, scale, borderRadius }, i) => (
         <animated.div {...bind()} key={i} style={{ display, x }}>
           <animated.div style={{ scale, borderRadius }}>
-            {pages[i]({ isActive: activeIndex === i, summary })}
+            {pages[i]({ isActive: activeIndex === i, summary, user })}
           </animated.div>
         </animated.div>
       ))}
