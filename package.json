@@ -6,14 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
-    "next": "11.0.1",
+    "@go1d/go1d": "^6.8.2",
+    "@react-spring/web": "^9.2.4",
+    "@use-gesture/react": "^10.1.1",
+    "axios": "^0.21.1",
+    "canvas-confetti": "^1.4.0",
+    "lodash": "^4.17.21",
+    "next": "^12.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-device-detect": "^2.1.2",
+    "react-dom": "17.0.2",
+    "slate-plain-serializer": "^0.7.13"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.176",
     "@types/react": "17.0.14",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
