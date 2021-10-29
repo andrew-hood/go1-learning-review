@@ -59,7 +59,7 @@ export default function Home() {
               Try it out on your phone
             </Heading>
             <View padding={4} borderRadius={4} backgroundColor="background">
-              <Image src="/qrcode.png" width={200} height={200} unoptimized={true} loader={({src}) => src} />
+              <Image src="/qr_code.png" width={200} height={200} unoptimized={true} loader={({src}) => src} />
             </View>
           </View>
 
