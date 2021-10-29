@@ -1,9 +1,11 @@
-import { ButtonFilled, Heading, SpotIcon, Text, View } from "@go1d/go1d";
+import { ButtonFilled, ButtonMinimal, Heading, SpotIcon, Text, View } from "@go1d/go1d";
 import { useEffect, useRef } from "react";
+import useAccessToken from "../../hooks/useLogin";
 
 interface PageProp {
   isActive?: boolean;
   user?: any;
+  portal?: any;
   summary?: {
     completed: number;
     inProgress: number;
@@ -36,8 +38,8 @@ const Slide: React.FC<SlideProp> = ({ heading, content, icon, color, backgroundC
   )
 }
 
-const Introduction = ({ isActive, summary, user }: PageProp) => {
-  return (
+const Introduction = ({ user }: PageProp) => {
+  return user && (
     <Slide
       heading={`Hey ${user?.first_name}! Let's check out your Go1 activity this week...`}
       content="Swipe to find out..."
@@ -100,7 +102,8 @@ const Assigned = ({ isActive, summary }: PageProp) => {
   )
 }
 
-const Summary = ({ isActive, summary }: PageProp) => {
+const Summary = ({ portal }: PageProp) => {
+  const { resetToken } = useAccessToken();
   return (
     <Slide
       heading="Eyes on the climb!"
@@ -109,7 +112,8 @@ const Summary = ({ isActive, summary }: PageProp) => {
       backgroundColor="background"
     >
       <View padding={5}>
-        <ButtonFilled color="accent">Let&apos;s go</ButtonFilled>
+        <ButtonFilled href={`https://${portal?.url}`} size="lg" color="accent">Let&apos;s go</ButtonFilled>
+        <ButtonMinimal onClick={resetToken} marginTop={3}>Logout</ButtonMinimal>
       </View>
     </Slide>
   )

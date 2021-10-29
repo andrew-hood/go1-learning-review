@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 function useAccessToken() {
-  const [token, setToken] = useState<string>();
+  const [token, setToken] = useState<string|null>();
   const [params, setParams] = useState<URLSearchParams>();
 
   useEffect(() => {
@@ -26,7 +26,13 @@ function useAccessToken() {
     window.location.assign(`https://auth.go1.com/oauth/authorize?response_type=token&client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}&scope=user.read account.read lo.read enrollment.read`)
   };
 
-  return { token, refreshToken };
+  const resetToken = () => {
+    window.localStorage.removeItem('token');
+    setToken(null);
+    window.location.reload();
+  }
+
+  return { token, refreshToken, resetToken };
 };
 
 export default useAccessToken;

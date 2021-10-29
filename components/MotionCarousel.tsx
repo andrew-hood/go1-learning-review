@@ -14,6 +14,10 @@ const pages = [
   Summary,
 ];
 
+interface PortalResponse {
+  url: string;
+}
+
 interface UserResponse {
   first_name: string;
   last_name: string;
@@ -26,6 +30,7 @@ interface EnrolmentResponse {
 }
 
 const MotionCarousel = ({ width }: { width: number}) => {
+  const { data: portal } = useFetchData<PortalResponse>('/account');
   const { data: user } = useFetchData<UserResponse>('/me');
   const { data } = useFetchData<EnrolmentResponse>('/enrollments?limit=50');
   const [summary, setSummary] = useState<any>();
@@ -87,7 +92,7 @@ const MotionCarousel = ({ width }: { width: number}) => {
       {props.map(({ x, display, scale, borderRadius }, i) => (
         <animated.div {...bind()} key={i} style={{ display, x }}>
           <animated.div style={{ scale, borderRadius }}>
-            {pages[i]({ isActive: activeIndex === i, summary, user })}
+            {pages[i]({ isActive: activeIndex === i, summary, user, portal })}
           </animated.div>
         </animated.div>
       ))}

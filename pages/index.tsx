@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { View, Container, Heading, ButtonFilled } from '@go1d/go1d'
+import IconGo1Logo from '@go1d/go1d/build/components/Icons/Go1Logo';
 import PhoneTemplate from '../components/PhoneTemplate'
 import MotionCarousel from '../components/MotionCarousel'
 import { isBrowser } from 'react-device-detect'
@@ -21,7 +22,8 @@ export default function Home() {
   const Login = () => {
     return (
       <View width="100%" height="100%" justifyContent="center" alignItems="center">
-        <ButtonFilled onClick={refreshToken}>Login</ButtonFilled>
+        <IconGo1Logo size={10} color="accent" marginBottom={8} />
+        <ButtonFilled color="complementary" size="lg" onClick={refreshToken}>Login to Go1</ButtonFilled>
       </View>
     )
   }
